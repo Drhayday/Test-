@@ -1,0 +1,65 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Calculator</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Barn & Silo Upgrade Calculator</h1>
+        
+        <form action="/calculate" method="POST" class="calculator-form">
+            <div class="form-group">
+                <label for="initialCapacity">Initial Capacity:</label>
+                <input type="number" 
+                       id="initialCapacity" 
+                       name="initialCapacity" 
+                       required 
+                       min="50" 
+                       max="24999">
+            </div>
+            
+            <div class="form-group">
+                <label for="finalCapacity">Final Capacity:</label>
+                <input type="number" 
+                       id="finalCapacity" 
+                       name="finalCapacity" 
+                       required 
+                       min="51" 
+                       max="25000">
+            </div>
+            
+            <button type="submit">Calculate</button>
+        </form>
+
+        <% if (error) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (result) { %>
+            <div class="result">
+                <h2>Results</h2>
+                <div class="upgrade-info">
+                    <h3>Barn Materials Needed:</h3>
+                    <p><span class="material">Planks:</span> <%= result.tools %></p>
+                    <p><span class="material">Bolts:</span> <%= result.tools %></p>
+                    <p><span class="material">Tape:</span> <%= result.tools %></p>
+                    
+                    <h3>Silo Materials Needed:</h3>
+                    <p><span class="material">Nails:</span> <%= result.tools %></p>
+                    <p><span class="material">Screws:</span> <%= result.tools %></p>
+                    <p><span class="material">Panels:</span> <%= result.tools %></p>
+                    
+                    <h3>Total Sets Required:</h3>
+                    <p class="sets"><%= result.setsNeeded %> sets</p>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
